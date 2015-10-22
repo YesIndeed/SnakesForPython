@@ -8,7 +8,7 @@ world into something awesome.
 
 As you experiment with colors, make sure to answer the questions in this file.
 
-1) What does an RGB tuple with low values like (20, 20, 20) look like? What about a tuple with high values
+1) What does an RGB triple with low values like (20, 20, 20) look like? What about a triple with high values
    like (240, 240, 240)?
 
 2) As you experiment with changing the color of the snake, keep track of the RGB values
