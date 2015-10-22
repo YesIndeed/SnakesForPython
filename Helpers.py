@@ -24,9 +24,37 @@ from Constants import *
 # Q 1.2: In Java, what is a method?
 # Q 1.3: How does a Python function look different than a Java method?
 
-
 walls = []
 
+class Block():
+    def __init__(self, rect, color):
+        self.rect = rect
+        self.color = color
+    def collideList(self, blocks):
+        for block in blocks:
+            if self.rect.colliderect(block.rect):
+                return True
+        return False
+
+    # Move block in a certain direction.
+    def moveInDir(self, dir):
+        if dir == 1:
+            deltaX = blockSize
+        elif dir == 3:
+            deltaX = -blockSize
+        else:
+            deltaX = 0
+
+        if dir == 0:
+            deltaY = blockSize
+        elif dir == 2:
+            deltaY = -blockSize
+        else:
+            deltaY = 0
+        self.rect = self.rect.move(deltaX, deltaY)
+    def changeColor(self):
+        if self.color[0] < 255:
+            self.color = (self.color[0] + 1, self.color[1], self.color[2])
 
 def initWalls(screen):
     for i in range(0, xBound):
@@ -40,36 +68,12 @@ def initWalls(screen):
     for wall in walls:
         pygame.draw.rect(screen, (0, 0, 255), wall)
 
-
-# Useful debug method. Text is a string, rect is a Rect.
-def printRect(text, rect):
-    print text + " Top-left: (" + str(rect.left) + ", " + str(oldPiece.top) + ")"
-
 # Code for if snake runs into itself or game exits.
 def quitGame():
     print "Game over!"
     # How can we measure the player's score?
     print "Your score is: "
     sys.exit(0)
-
-# Code to move the head.
-def moveHead(headRect, dir):
-    if dir == 1:
-        deltaX = blockSize
-    elif dir == 3:
-        deltaX = -blockSize
-    else:
-        deltaX = 0
-
-    if dir == 0:
-        deltaY = blockSize
-    elif dir == 2:
-        deltaY = -blockSize
-    else:
-        deltaY = 0
-
-    newRect= headRect.move(deltaX, deltaY)
-    return newRect
 
 # Q 1.4 What do you think return means?
 
@@ -81,18 +85,16 @@ def moveBody(toRect, fromRect):
     return fromRect.move(deltaX, deltaY)
 
 # Creates a random rectangle.
-def randomRect():
-    return Rect(randint(1, xBound - 2) * blockSize, randint(1, yBound - 2) * blockSize, blockSize, blockSize)
+def randomBlock(color):
+    return Block(Rect(randint(1, xBound - 2) * blockSize, randint(1, yBound - 2) * blockSize, blockSize, blockSize), color)
 
 # Draw the screen depending on what happens.
 def draw(oldPiece, head, body, appleRect, hasEaten, screen):
-
-
     # Draw the head.
-    pygame.draw.rect(screen, (0, 255, 0), head)
+    pygame.draw.rect(screen, head.color, head.rect)
     # Draw the body.
     for block in body:
-        pygame.draw.rect(screen, (0, 155, 0), block)
+        pygame.draw.rect(screen, block.color, block.rect)
 
     # If we have not eaten, we need to clear the old rectangle.
     if (not hasEaten):

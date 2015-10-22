@@ -9,8 +9,8 @@ from Constants import *
 
 
 # This is the head of the snake.
-# What type is it?!?!
-snakeHead = Rect(blockSize, blockSize, blockSize, blockSize)
+# What type is it?
+snakeHead = Block(Rect(blockSize, blockSize, blockSize, blockSize), (0, 255, 0))
 
 # This is the body of the snake.
 # These brackets mean that the body is a list;
@@ -19,7 +19,7 @@ snakeBody = []
 
 # This is the apple.
 # Calling randomRect starts the apple off in a random place on the screen.
-apple = randomRect()
+apple = randomBlock((255, 0, 0))
 
 # Set up the screen. Don't worry about this code - it tells python that we want a screen of a certain size
 pygame.init()
@@ -44,39 +44,40 @@ while True:
         # Why do we check direction != UP, direction != DOWN, etc. ?
         elif keypress.type == KEYDOWN:
             # Check for the up arrow key
-            if keypress.key == K_UP and direction != UP:
+            if keypress.key == K_UP and direction != DOWN:
                 direction = UP
             # Check for the down arrow key
-            elif keypress.key == K_DOWN and direction != DOWN:
+            elif keypress.key == K_DOWN and direction != UP:
                 direction = DOWN
             # Check for the left arrow key
-            elif keypress.key == K_LEFT and direction != LEFT:
+            elif keypress.key == K_LEFT and direction != RIGHT:
                 direction = LEFT
             # Check for the right arrow key
-            elif keypress.key == K_RIGHT and direction != RIGHT:
+            elif keypress.key == K_RIGHT and direction != LEFT:
                 direction = RIGHT
 
     # Copy the head for later use.
-    oldPiece = snakeHead.copy()
+    oldPiece = snakeHead.rect.copy()
     # Move the head in the direction we are facing.
-    snakeHead = moveHead(snakeHead, direction)
+    snakeHead.moveInDir(direction)
 
     # Update the snake's body (excluding the head).
     # This piece of code takes each piece in the body and shifts it to where the next piece is
     # so it looks like the snake is moving!
     for i in range(0, len(snakeBody)):
-        temp = snakeBody[i].copy()
-        snakeBody[i] = moveBody(oldPiece, snakeBody[i])
+        temp = snakeBody[i].rect.copy()
+        snakeBody[i].rect = moveBody(oldPiece, snakeBody[i].rect)
         oldPiece = temp
+        snakeBody[i].changeColor()
 
     # These are variables that are True or False depending on conditions.
     # What do we call these kinds of variables?
-    hasHitWall = snakeHead.collidelist(walls) != -1
-    hasHitBody = snakeHead.collidelist(snakeBody) != -1
-    hasEaten = snakeHead.colliderect(apple)
+    hasHitWall = snakeHead.rect.collidelist(walls) != -1
+    hasHitBody = snakeHead.collideList(snakeBody)
+    hasEaten = snakeHead.rect.colliderect(apple)
 
     # Checks if the head collides with the wall.
-    if(hasHitWall):
+    if(hasHitWall or hasHitBody):
         quitGame()
 
     # We need to check if the head has collided with the body!
@@ -87,8 +88,8 @@ while True:
 
     # Checks if the head collides with the apple.
     if (hasEaten):
-        apple = randomRect()
-        snakeBody.append(oldPiece)
+        apple = randomBlock((255, 0, 0))
+        snakeBody.append(Block(oldPiece, (0, 155, 0)))
 
     #Graphically draws all the updates we just made.
     draw(oldPiece, snakeHead, snakeBody, apple, hasEaten, screen)
