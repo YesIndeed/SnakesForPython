@@ -8,7 +8,7 @@ from Constants import *
 
 # This is the head of the snake.
 # What color is the snake head?
-snakeHead = Block(Rect(blockSize, blockSize, blockSize, blockSize), Color(100, 100, 100))
+snakeHead = Block(Rect(blockSize, blockSize, blockSize, blockSize), Color(50, 50, 50))
 
 # This is the body of the snake.
 # These brackets mean that the body is a list;
@@ -25,8 +25,10 @@ apple = randomBlock(Color(60, 60, 60))
 # Think about what this method does right now, but feel free to change it!
 # Right now, our program doesn't call this method. Where can we use this function?
 def changeColor(block):
-    if (block.color.r < 255):
+    if (block.color.r < 255 and block.color.g < 255 and block.color.b < 255):
         block.color.r = block.color.r + 1
+        block.color.g = block.color.g + 1
+        block.color.b = block.color.b + 1
 
 # Set up the screen. Don't worry about this code - it tells python that we want a screen of a certain size
 pygame.init()
@@ -40,7 +42,7 @@ clock = pygame.time.Clock()
 # (hint- when is the while condition false?)
 while True:
     clock.tick(10)
-
+    changeColor(snakeHead)
     # This gets the keyboard input. Don't worry too much about the first couple lines.
     for keypress in pygame.event.get():
         if keypress.type == QUIT:
@@ -85,11 +87,6 @@ while True:
     # Checks if the head collides with the wall.
     if(hasHitWall or hasHitBody):
         quitGame()
-
-    # We need to check if the head has collided with the body!
-    # How can we do this?
-    # (hint- it should be very similar to the line above!)
-    # Go ahead and do it here!
 
     # Checks if the head collides with the apple.
     if (hasEaten):
