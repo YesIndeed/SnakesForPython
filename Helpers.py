@@ -30,6 +30,7 @@ class Block():
     def __init__(self, rect, color):
         self.rect = rect
         self.color = color
+
     def collideList(self, blocks):
         for block in blocks:
             if self.rect.colliderect(block.rect):
@@ -52,9 +53,6 @@ class Block():
         else:
             deltaY = 0
         self.rect = self.rect.move(deltaX, deltaY)
-    def changeColor(self):
-        if self.color[0] < 255:
-            self.color = (self.color[0] + 1, self.color[1], self.color[2])
 
 def initWalls(screen):
     for i in range(0, xBound):
@@ -89,7 +87,7 @@ def randomBlock(color):
     return Block(Rect(randint(1, xBound - 2) * blockSize, randint(1, yBound - 2) * blockSize, blockSize, blockSize), color)
 
 # Draw the screen depending on what happens.
-def draw(oldPiece, head, body, appleRect, hasEaten, screen):
+def draw(oldPiece, head, body, apple, hasEaten, screen):
     # Draw the head.
     pygame.draw.rect(screen, head.color, head.rect)
     # Draw the body.
@@ -101,7 +99,7 @@ def draw(oldPiece, head, body, appleRect, hasEaten, screen):
         pygame.draw.rect(screen, (0, 0, 0), oldPiece)
 
     # Draw the apple.
-    pygame.draw.rect(screen, (255, 0, 0), appleRect)
+    pygame.draw.rect(screen, apple.color, apple.rect)
 
 
 

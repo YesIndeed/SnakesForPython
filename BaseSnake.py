@@ -6,11 +6,9 @@ from pygame.locals import *
 from Helpers import *
 from Constants import *
 
-
-
 # This is the head of the snake.
-# What type is it?
-snakeHead = Block(Rect(blockSize, blockSize, blockSize, blockSize), (0, 255, 0))
+# What color is the snake head?
+snakeHead = Block(Rect(blockSize, blockSize, blockSize, blockSize), Color(100, 100, 100))
 
 # This is the body of the snake.
 # These brackets mean that the body is a list;
@@ -19,7 +17,12 @@ snakeBody = []
 
 # This is the apple.
 # Calling randomRect starts the apple off in a random place on the screen.
-apple = randomBlock((255, 0, 0))
+apple = randomBlock(Color(255, 0, 0))
+
+# A color has three values, color.r, color.g, color.b.
+def changeColor(block):
+    if (block.color.r < 255):
+        block.color.r = block.color.r + 1
 
 # Set up the screen. Don't worry about this code - it tells python that we want a screen of a certain size
 pygame.init()
@@ -68,7 +71,7 @@ while True:
         temp = snakeBody[i].rect.copy()
         snakeBody[i].rect = moveBody(oldPiece, snakeBody[i].rect)
         oldPiece = temp
-        snakeBody[i].changeColor()
+        changeColor(snakeBody[i])
 
     # These are variables that are True or False depending on conditions.
     # What do we call these kinds of variables?
@@ -85,11 +88,10 @@ while True:
     # (hint- it should be very similar to the line above!)
     # Go ahead and do it here!
 
-
     # Checks if the head collides with the apple.
     if (hasEaten):
-        apple = randomBlock((255, 0, 0))
-        snakeBody.append(Block(oldPiece, (0, 155, 0)))
+        apple = randomBlock(Color(255, 0, 0))
+        snakeBody.append(Block(oldPiece, Color(80, 80, 80)))
 
     #Graphically draws all the updates we just made.
     draw(oldPiece, snakeHead, snakeBody, apple, hasEaten, screen)
