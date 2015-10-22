@@ -17,9 +17,13 @@ snakeBody = []
 
 # This is the apple.
 # Calling randomRect starts the apple off in a random place on the screen.
-apple = randomBlock(Color(255, 0, 0))
+# How does the Color() affect the apple?
+apple = randomBlock(Color(60, 60, 60))
 
-# A color has three values, color.r, color.g, color.b.
+# A block contains a color, block.color.
+# We can modify an existing color's RGB values by setting block.color.r, block.color.g, block.color.b.
+# Think about what this method does right now, but feel free to change it!
+# Right now, our program doesn't call this method. Where can we use this function?
 def changeColor(block):
     if (block.color.r < 255):
         block.color.r = block.color.r + 1
@@ -89,7 +93,7 @@ while True:
 
     # Checks if the head collides with the apple.
     if (hasEaten):
-        apple = randomBlock(Color(255, 0, 0))
+        apple = randomBlock(Color(40, 40, 40))
         snakeBody.append(Block(oldPiece, Color(80, 80, 80)))
 
     #Graphically draws all the updates we just made.

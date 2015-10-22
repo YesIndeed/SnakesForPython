@@ -1,0 +1,28 @@
+--------------------------------------
+- Python Lesson 2: FUNctions & Color -
+--------------------------------------
+
+Due to the changing seasons and shedding skin, the world of Snake looks greyer than it used to.
+Your mission is to figure out how to change colors in our game and to change this boring, grey
+world into something awesome.
+
+As you experiment with colors, make sure to answer the questions in this file.
+
+1) What does an RGB tuple with low values like (20, 20, 20) look like? What about a tuple with high values
+   like (240, 240, 240)?
+
+2) As you experiment with changing the color of the snake, keep track of the RGB values
+   that you discovered below. There are some colors that you should try to discover.
+   There are many ways to represent a color (for example, there are many shades of orange),
+   so record at least one RGB value. If you discover some cool colors, add them below!
+-- Example: GREY: (60, 60, 60)
+
+RED:
+GREEN:
+BLUE:
+YELLOW:
+PURPLE:
+CYAN:
+
+3) How can we change the color of a block that already exists (like pieces of the snake)?
+   List how you modify the color of an existing block.
