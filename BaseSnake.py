@@ -71,7 +71,6 @@ while True:
         temp = snakeBody[i].rect.copy()
         snakeBody[i].rect = moveBody(oldPiece, snakeBody[i].rect)
         oldPiece = temp
-        changeColor(snakeBody[i])
 
     # These are variables that are True or False depending on conditions.
     # What do we call these kinds of variables?
