@@ -1,4 +1,4 @@
-__author__ = 'Mica'
+# Label the scope of each variable by drawing a box around the range in which it exists and is usable
 
 rainbowColors = ["Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet"]
 for i in range (7):
