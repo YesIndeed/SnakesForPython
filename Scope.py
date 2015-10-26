@@ -42,6 +42,20 @@ exampleUser = Player("Mr. Chuah")
 exampleUser.score = new_score(999999999999)
 print exampleUser.name, exampleUser.score
 
-# Part 5: Show what you've got
-# Make two new players, name them after you and your partner. Then, give the players new highscores from our list
+#  Part 5: Show what you've got
+#  Make two new players, name them after you and your partner.
 
+#  Then, give the players new highscores from our list
+
+#  Using a loop, add points to each player's score.
+
+#  Find how much each player's score increased by.
+
+#  Find which player has the lowest score.
+
+#  Finally, describe the scopes of every variable you use. You must have at least four different scopes.
+
+
+
+#  When you're done, brainstorm ideas with your partner about taking advantage of what we know about
+#  scope to add to our snake game.
